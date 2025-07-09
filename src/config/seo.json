@@ -1,0 +1,128 @@
+{
+  "blog": {
+    "title": "AI代码模板博客 - 前端开发技术分享",
+    "description": "分享前端开发、AI工具和代码模板的最新技术文章，帮助开发者提升编程效率和代码质量。",
+    "keywords": ["前端开发", "AI工具", "代码模板", "React", "Next.js", "TypeScript", "技术分享"],
+    "author": "AI代码模板团队",
+    "siteUrl": "https://ai-code-template.com",
+    "openGraph": {
+      "type": "website",
+      "siteName": "AI代码模板博客",
+      "locale": "zh_CN",
+      "images": [
+        {
+          "url": "/images/blog-og-image.jpg",
+          "width": 1200,
+          "height": 630,
+          "alt": "AI代码模板博客"
+        }
+      ]
+    },
+    "twitter": {
+      "card": "summary_large_image",
+      "site": "@ai_code_template",
+      "creator": "@ai_code_template"
+    },
+    "structuredData": {
+      "website": {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "AI代码模板博客",
+        "url": "https://ai-code-template.com",
+        "description": "分享前端开发、AI工具和代码模板的最新技术文章",
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": "https://ai-code-template.com/search?q={search_term_string}",
+          "query-input": "required name=search_term_string"
+        }
+      },
+      "organization": {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "AI代码模板",
+        "url": "https://ai-code-template.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://ai-code-template.com/logo.png"
+        },
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "contactType": "客户服务",
+          "email": "contact@ai-code-template.com"
+        }
+      },
+      "blog": {
+        "@context": "https://schema.org",
+        "@type": "Blog",
+        "name": "AI代码模板博客",
+        "description": "分享前端开发、AI工具和代码模板的最新技术文章",
+        "url": "https://ai-code-template.com/blog",
+        "author": {
+          "@type": "Organization",
+          "name": "AI代码模板团队"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "AI代码模板",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://ai-code-template.com/logo.png"
+          }
+        }
+      },
+      "article": {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": "{title}",
+        "description": "{description}",
+        "image": "{image}",
+        "author": {
+          "@type": "Person",
+          "name": "{author}"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "AI代码模板",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://ai-code-template.com/logo.png"
+          }
+        },
+        "datePublished": "{datePublished}",
+        "dateModified": "{dateModified}",
+        "mainEntityOfPage": {
+          "@type": "WebPage",
+          "@id": "{url}"
+        },
+        "keywords": "{keywords}",
+        "articleSection": "{category}",
+        "wordCount": "{wordCount}"
+      }
+    }
+  },
+  "defaults": {
+    "title": "AI代码模板 - 智能前端开发工具",
+    "description": "提供高质量的AI代码模板和前端开发工具，帮助开发者快速构建现代化的Web应用。",
+    "keywords": ["AI", "代码模板", "前端开发", "React", "Next.js", "开发工具"],
+    "author": "AI代码模板团队",
+    "siteUrl": "https://ai-code-template.com",
+    "openGraph": {
+      "type": "website",
+      "siteName": "AI代码模板",
+      "locale": "zh_CN",
+      "images": [
+        {
+          "url": "/images/og-image.jpg",
+          "width": 1200,
+          "height": 630,
+          "alt": "AI代码模板"
+        }
+      ]
+    },
+    "twitter": {
+      "card": "summary_large_image",
+      "site": "@ai_code_template",
+      "creator": "@ai_code_template"
+    }
+  }
+}

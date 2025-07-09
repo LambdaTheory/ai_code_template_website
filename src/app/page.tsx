@@ -49,6 +49,11 @@ export default function Home() {
                   静态页面演示
                 </Link>
               </Button>
+              <Button asChild>
+                <Link href="/seo-demo">
+                  SEO配置演示
+                </Link>
+              </Button>
               <Button variant="outline" asChild>
                 <a href="https://vercel.com/new" target="_blank" rel="noopener noreferrer">
                   部署到 Vercel
