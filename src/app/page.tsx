@@ -40,18 +40,23 @@ export default function Home() {
             
             <div className="mt-6 flex flex-wrap gap-2">
               <Button asChild>
+                <Link href="/components">
+                  组件展示
+                </Link>
+              </Button>
+              <Button asChild variant="secondary">
                 <Link href="/isr-demo">
-                  Try ISR Demo
+                  静态页面演示
                 </Link>
               </Button>
               <Button variant="outline" asChild>
                 <a href="https://vercel.com/new" target="_blank" rel="noopener noreferrer">
-                  Deploy to Vercel
+                  部署到 Vercel
                 </a>
               </Button>
               <Button variant="outline" asChild>
                 <a href="https://ui.shadcn.com" target="_blank" rel="noopener noreferrer">
-                  ShadCN UI Docs
+                  ShadCN UI 文档
                 </a>
               </Button>
             </div>
