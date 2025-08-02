@@ -36,23 +36,34 @@ class DirectoryTreeGenerator:
         }
         
         # 加载现有配置
-        self.descriptions = self.load_descriptions()
+        self.config_data = self.load_config()
+        self.descriptions = self.config_data.get('descriptions', {})
+        self.custom_ignore = self.config_data.get('ignore', [])
         
-    def load_descriptions(self) -> Dict[str, str]:
-        """加载文件描述配置"""
+    def load_config(self) -> Dict:
+        """加载配置文件"""
         if self.config_file.exists():
             try:
                 with open(self.config_file, 'r', encoding='utf-8') as f:
-                    return json.load(f)
+                    data = json.load(f)
+                    # 兼容旧格式：如果直接是描述字典，转换为新格式
+                    if isinstance(data, dict) and 'descriptions' not in data and 'ignore' not in data:
+                        # 旧格式兼容
+                        return {'descriptions': data, 'ignore': []}
+                    return data
             except (json.JSONDecodeError, IOError):
                 print(f"警告：无法读取配置文件 {self.config_file}")
-        return {}
+        return {'descriptions': {}, 'ignore': []}
     
     def save_descriptions(self):
         """保存文件描述配置"""
         try:
+            config_data = {
+                'ignore': self.custom_ignore,
+                'descriptions': self.descriptions
+            }
             with open(self.config_file, 'w', encoding='utf-8') as f:
-                json.dump(self.descriptions, f, ensure_ascii=False, indent=2)
+                json.dump(config_data, f, ensure_ascii=False, indent=2)
             print(f"配置已保存到 {self.config_file}")
         except IOError as e:
             print(f"错误：无法保存配置文件 - {e}")
@@ -60,9 +71,24 @@ class DirectoryTreeGenerator:
     def should_ignore(self, path: Path) -> bool:
         """判断是否应该忽略某个文件或目录"""
         name = path.name
-        
-        # 检查完整路径匹配
         relative_path = str(path.relative_to(self.root_path))
+        
+        # 1. 检查自定义 ignore 列表（优先级最高）
+        for ignore_pattern in self.custom_ignore:
+            # 完整路径匹配
+            if relative_path == ignore_pattern:
+                return True
+            # 路径前缀匹配（用于忽略整个目录）
+            if relative_path.startswith(ignore_pattern + '/') or relative_path.startswith(ignore_pattern + '\\'):
+                return True
+            # 通配符匹配
+            if ignore_pattern.startswith('*') and name.endswith(ignore_pattern[1:]):
+                return True
+            if ignore_pattern.endswith('*') and name.startswith(ignore_pattern[:-1]):
+                return True
+        
+        # 2. 检查默认忽略模式
+        # 检查完整路径匹配
         if relative_path in self.ignore_patterns:
             return True
             
@@ -211,6 +237,7 @@ class DirectoryTreeGenerator:
         self.descriptions[relative_path] = description
         print(f"已添加描述：{relative_path} -> {description}")
         return True
+    
     
     def generate_and_save(self):
         """生成目录结构并保存到文件"""
