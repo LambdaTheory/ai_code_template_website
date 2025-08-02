@@ -43,6 +43,8 @@ def main():
     tool_input = json_context.get("tool_input", {})
     tool_result = json_context.get("tool_result", {})
     
+    print("on-post-tool-use:")
+    print(json.dumps(json_context, indent=4, ensure_ascii=False))
     if (tool_name == "Read" and 
         tool_input.get("file_path") and 
         ".env" in tool_input["file_path"]):
@@ -60,10 +62,6 @@ def main():
         # 输出修改后的结果
         modified_context = json_context.copy()
         modified_context["tool_result"] = modified_result
-        
-        print("on-post-tool-use", modified_context)
-    else:
-        print("on-post-tool-use", json_context)
     
     # 创建音频播放器并播放对应的音频
     player = AudioPlayer()

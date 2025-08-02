@@ -6,14 +6,11 @@ Claude Code on-pre-tool-use hook - plays audio before tool execution
 import json
 import sys
 from audio_player import AudioPlayer
-import logging
-logging.basicConfig(level=logging.INFO, format='%(levelname)s: %(message)s')
-logger = logging.getLogger(__name__)
 
 def main():
     # 读取事件数据（保持与原始钩子兼容）
     json_context = json.loads(sys.stdin.read())
-    logger.info("on-pre-tool-use %s", json_context)
+    print("on-pre-tool-use", json.dumps(json_context, indent=4), file=sys.stdout)
     
     # 创建音频播放器并播放对应的音频
     player = AudioPlayer()
