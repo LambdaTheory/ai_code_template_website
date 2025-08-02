@@ -1,0 +1,4 @@
+{
+  "src/app/page.tsx": "Next.js 应用的首页组件",
+  "src/app/layout.tsx": "Next.js 应用的根布局组件，包含全局样式和字体配置"
+}
