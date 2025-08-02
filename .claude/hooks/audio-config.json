@@ -2,12 +2,12 @@
   "enabled": true,
   "volume": 0.8,
   "audio_files": {
-    "on_stop": "voice/girl/construction complete.wav",
-    "on_user_prompt_submit": "voice/girl/building.wav",
-    "on_subagent_stop": "voice/girl/unit ready.wav",
-    "on_session_start": "voice/girl/unit prepare.wav",
-    "on_notification": "voice/girl/new construction options.wav",
-    "cancel": "voice/girl/cancel.wav",
-    "low power": "voice/girl/low power.wav"
+    "on_stop": ".claude/voice/girl/construction complete.wav",
+    "on_user_prompt_submit": ".claude/voice/girl/building.wav",
+    "on_subagent_stop": ".claude/voice/girl/unit ready.wav",
+    "on_session_start": ".claude/voice/girl/unit prepare.wav",
+    "on_notification": ".claude/voice/girl/new construction options.wav",
+    "cancel": ".claude/voice/girl/cancel.wav",
+    "low power": ".claude/voice/girl/low power.wav"
   }
 }
