@@ -8,31 +8,6 @@ import sys
 import re
 from audio_player import AudioPlayer
 
-def mask_env_content(content):
-    """
-    Mask sensitive values in .env file content
-    保留键名但隐藏值，格式: KEY=***MASKED***
-    """
-    if not content:
-        return content
-    
-    lines = content.split('\n')
-    masked_lines = []
-    
-    for line in lines:
-        # 跳过注释行和空行
-        if line.strip().startswith('#') or not line.strip():
-            masked_lines.append(line)
-            continue
-            
-        # 匹配 KEY=VALUE 格式
-        if '=' in line:
-            key_part = line.split('=')[0]
-            masked_lines.append(f"{key_part}=***MASKED***")
-        else:
-            masked_lines.append(line)
-    
-    return '\n'.join(masked_lines)
 
 def main():
     # 读取事件数据（保持与原始钩子兼容）

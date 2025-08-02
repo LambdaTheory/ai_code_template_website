@@ -7,6 +7,25 @@ import json
 import sys
 from audio_player import AudioPlayer
 
+def mask_env_content(content):
+    """
+    保留键名但隐藏值，格式: KEY=***MASKED***
+    """
+    if not content:
+        return content
+    
+    masked_lines = []
+    
+    for line in content.split('\n'):
+        if '=' in line:
+            # 匹配 KEY=VALUE 格式
+            key_part = line.split('=')[0]
+            masked_lines.append(f"{key_part}=***MASKED***")
+        else:
+            masked_lines.append(line)
+    
+    return '\n'.join(masked_lines)
+
 def main():
     # 读取事件数据（保持与原始钩子兼容）
     json_context = json.loads(sys.stdin.read())
@@ -32,6 +51,24 @@ def main():
             }""")
             player.play(hook_name="cancel")
             sys.exit(2)
+    elif command == "Read":
+        if path and path.endswith(".env"):
+            try:
+                # 直接读取文件内容
+                with open(path, 'r', encoding='utf-8') as f:
+                    content = f.read()
+                masked = mask_env_content(content)
+                # 通过 JSON 输出 + decision=block 把原始结果屏蔽、把脱敏结果喂回 Claude
+                print(json.dumps({
+                    "decision": "block",
+                    "reason": f"以下为脱敏后的 .env 内容，请据此继续：\n\n{masked}"
+                }), file=sys.stderr)
+                player.play(hook_name="low power")
+                sys.exit(2)
+            except Exception as e:
+                # 如果读取失败，让工具正常执行
+                print(f"读取 .env 文件失败: {e}", file=sys.stderr)
+                pass
 
     if command == "Task":
         pass
