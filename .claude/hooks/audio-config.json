@@ -6,6 +6,7 @@
     "on_user_prompt_submit": "voice/girl/building.wav",
     "on_subagent_stop": "voice/girl/unit ready.wav",
     "on_session_start": "voice/girl/unit prepare.wav",
-    "on_notification": "voice/girl/new construction options.wav"
+    "on_notification": "voice/girl/new construction options.wav",
+    "cancel": "voice/girl/cancel.wav"
   }
 }

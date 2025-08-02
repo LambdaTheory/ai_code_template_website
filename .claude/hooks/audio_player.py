@@ -61,7 +61,7 @@ class AudioPlayer:
             
         relative_path = self.config.get("audio_files", {}).get(hook_name)
         if not relative_path:
-            logger.warning(f"未找到钩子 {hook_name} 的音频配置")
+            logger.info(f"未找到钩子 {hook_name} 的音频配置")
             return None
         
         audio_path = self.project_root / relative_path
