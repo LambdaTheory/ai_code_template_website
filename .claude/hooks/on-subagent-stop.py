@@ -3,14 +3,14 @@
 Claude Code on-subagent-stop hook - plays audio when a subagent stops responding
 """
 
+import json
 import sys
 from audio_player import AudioPlayer
 
 def main():
     # 读取事件数据（保持与原始钩子兼容）
-    context = sys.stdin.read()
-    print(context)
-    print("on-subagent-stop")
+    json_context = json.loads(sys.stdin.read())
+    print("on-subagent-stop", json_context)
     
     # 创建音频播放器并播放对应的音频
     player = AudioPlayer()

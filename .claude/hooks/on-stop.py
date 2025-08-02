@@ -3,13 +3,14 @@
 Claude Code on-stop hook - plays audio when Claude stops responding
 """
 
+import json
 import sys
 from audio_player import AudioPlayer
 
 def main():
     # 读取事件数据（保持与原始钩子兼容）
-    context = sys.stdin.read()
-    print(context)
+    json_context = json.loads(sys.stdin.read())
+    print("on-stop", json_context)
     
     # 创建音频播放器并播放对应的音频
     player = AudioPlayer()

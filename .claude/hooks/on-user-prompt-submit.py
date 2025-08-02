@@ -3,14 +3,14 @@
 Claude Code on-user-prompt-submit hook - plays audio when user submits a prompt
 """
 
+import json
 import sys
 from audio_player import AudioPlayer
 
 def main():
     # 读取事件数据（保持与原始钩子兼容）
-    context = sys.stdin.read()
-    print(context)
-    print("on-user-prompt-submit")
+    json_context = json.loads(sys.stdin.read())
+    print("on-user-prompt-submit", json_context)
     
     # 创建音频播放器并播放对应的音频
     player = AudioPlayer()
