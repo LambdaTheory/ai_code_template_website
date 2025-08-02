@@ -7,28 +7,33 @@ import json
 import sys
 import re
 import os
-import subprocess
 from pathlib import Path
 from audio_player import AudioPlayer
 
+# 添加 tools 目录到 Python 路径
+tools_path = Path(__file__).parent.parent / "tools"
+if str(tools_path) not in sys.path:
+    sys.path.insert(0, str(tools_path))
+
+# 导入目录结构更新模块
+try:
+    from update_directory_structure import update_directory_structure as update_dir_structure
+except ImportError as e:
+    print(f"警告：无法导入目录结构更新模块: {e}")
+    update_dir_structure = None
+
 
 def update_directory_structure():
-    """调用目录结构更新脚本"""
+    """调用目录结构更新模块"""
     try:
-        # 获取脚本路径
-        script_path = Path(__file__).parent.parent / "update_directory_structure.py"
-        if script_path.exists():
-            # 运行目录结构更新脚本
-            result = subprocess.run([
-                sys.executable, str(script_path)
-            ], capture_output=True, text=True, cwd=script_path.parent.parent)
-            
-            if result.returncode == 0:
+        if update_dir_structure:
+            success = update_dir_structure()
+            if success:
                 print("目录结构已自动更新")
             else:
-                print(f"目录结构更新失败: {result.stderr}")
+                print("目录结构更新失败")
         else:
-            print(f"未找到目录结构脚本: {script_path}")
+            print("目录结构更新模块不可用")
     except Exception as e:
         print(f"更新目录结构时发生错误: {e}")
 

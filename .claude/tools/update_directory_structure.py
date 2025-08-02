@@ -12,10 +12,12 @@ from typing import Dict, List, Set, Tuple
 
 class DirectoryTreeGenerator:
     def __init__(self, root_path: str = None):
-        # 如果没有指定根路径，且脚本在 .claude 目录中，则使用父目录作为项目根目录
+        # 如果没有指定根路径，且脚本在 .claude/tools 目录中，则使用项目根目录
         if root_path is None:
             script_path = Path(__file__).resolve()
-            if script_path.parent.name == '.claude':
+            if script_path.parent.name == 'tools' and script_path.parent.parent.name == '.claude':
+                self.root_path = script_path.parent.parent.parent
+            elif script_path.parent.name == '.claude':
                 self.root_path = script_path.parent.parent
             else:
                 self.root_path = Path(".").resolve()
@@ -268,6 +270,27 @@ class DirectoryTreeGenerator:
                 print(f"  {path}")
         else:
             print("所有文件都已有描述！")
+
+# 模块接口函数
+def update_directory_structure(root_path: str = None) -> bool:
+    """
+    更新目录结构文档的模块接口函数
+    
+    Args:
+        root_path: 项目根目录路径，如果为None则自动检测
+        
+    Returns:
+        bool: 成功返回True，失败返回False
+    """
+    try:
+        generator = DirectoryTreeGenerator(root_path)
+        generator.generate_and_save()
+        generator.save_descriptions()
+        return True
+    except Exception as e:
+        print(f"更新目录结构时发生错误: {e}")
+        return False
+
 
 def main():
     parser = argparse.ArgumentParser(
