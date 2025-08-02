@@ -19,21 +19,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## 项目架构
 
-### 目录结构
-```
-src/
-├── app/                    # Next.js App Router
-│   ├── layout.tsx         # 根布局，包含字体和元数据配置
-│   ├── page.tsx          # 首页
-│   ├── isr-demo/         # ISR 演示页面
-│   └── seo-demo/         # SEO 演示页面
-├── components/ui/         # ShadCN UI 组件库
-├── config/               # 配置文件
-├── lib/                  # 工具函数和库
-│   ├── utils.ts          # 通用工具函数（cn 函数用于类名合并）
-│   ├── seo.ts           # SEO 相关工具
-│   └── sitemap.ts       # 站点地图生成
-```
+目录结构： @docs/目录结构.md
 
 ### 核心技术栈
 - **Next.js 15+** with App Router
