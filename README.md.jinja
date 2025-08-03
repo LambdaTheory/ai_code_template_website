@@ -1,6 +1,6 @@
-# Next.js App Template
+# {{ project_display_name }}
 
-A complete Next.js application template with modern tools and best practices, including Tailwind CSS, ShadCN UI, ISR (Incremental Static Regeneration), and Vercel deployment configuration.
+{{ project_description }}
 
 ## 🚀 Features
 
@@ -22,8 +22,8 @@ A complete Next.js application template with modern tools and best practices, in
 
 1. **Clone the repository**
    ```bash
-   git clone <repository-url>
-   cd ai_code_template_website
+   git clone {{ repository_url }}
+   cd {{ project_name }}
    ```
 
 2. **Install dependencies**
@@ -194,3 +194,6 @@ This project is licensed under the MIT License.
 ---
 
 Built with ❤️ using Next.js, Tailwind CSS, and ShadCN UI
+{% if author_name %}
+
+作者：{{ author_name }}{% endif %}{% if author_email %} ({{ author_email }}){% endif %}

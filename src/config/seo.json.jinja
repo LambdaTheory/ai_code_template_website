@@ -1,13 +1,13 @@
 {
   "blog": {
-    "title": "AI代码模板博客 - 前端开发技术分享",
-    "description": "分享前端开发、AI工具和代码模板的最新技术文章，帮助开发者提升编程效率和代码质量。",
+    "title": "{{ website_title }}博客 - 前端开发技术分享",
+    "description": "{{ website_description }}",
     "keywords": ["前端开发", "AI工具", "代码模板", "React", "Next.js", "TypeScript", "技术分享"],
-    "author": "AI代码模板团队",
-    "siteUrl": "https://ai-code-template.com",
+    "author": "{{ author_name }}",
+    "siteUrl": "https://{{ website_url }}",
     "openGraph": {
       "type": "website",
-      "siteName": "AI代码模板博客",
+      "siteName": "{{ website_title }}博客",
       "locale": "zh_CN",
       "images": [
         {
@@ -20,53 +20,53 @@
     },
     "twitter": {
       "card": "summary_large_image",
-      "site": "@ai_code_template",
-      "creator": "@ai_code_template"
+      "site": "{% if twitter_handle %}@{{ twitter_handle }}{% else %}@{{ website_url.split('.')[0] }}{% endif %}",
+      "creator": "{% if twitter_handle %}@{{ twitter_handle }}{% else %}@{{ website_url.split('.')[0] }}{% endif %}"
     },
     "structuredData": {
       "website": {
         "@context": "https://schema.org",
         "@type": "WebSite",
-        "name": "AI代码模板博客",
-        "url": "https://ai-code-template.com",
+        "name": "{{ website_title }}博客",
+        "url": "https://{{ website_url }}",
         "description": "分享前端开发、AI工具和代码模板的最新技术文章",
         "potentialAction": {
           "@type": "SearchAction",
-          "target": "https://ai-code-template.com/search?q={search_term_string}",
+          "target": "https://{{ website_url }}/search?q={search_term_string}",
           "query-input": "required name=search_term_string"
         }
       },
       "organization": {
         "@context": "https://schema.org",
         "@type": "Organization",
-        "name": "AI代码模板",
-        "url": "https://ai-code-template.com",
+        "name": "{{ website_title }}",
+        "url": "https://{{ website_url }}",
         "logo": {
           "@type": "ImageObject",
-          "url": "https://ai-code-template.com/logo.png"
+          "url": "https://{{ website_url }}/logo.png"
         },
         "contactPoint": {
           "@type": "ContactPoint",
           "contactType": "客户服务",
-          "email": "contact@ai-code-template.com"
+          "email": "{{ author_email }}"
         }
       },
       "blog": {
         "@context": "https://schema.org",
         "@type": "Blog",
-        "name": "AI代码模板博客",
-        "description": "分享前端开发、AI工具和代码模板的最新技术文章",
-        "url": "https://ai-code-template.com/blog",
+        "name": "{{ website_title }}博客",
+        "description": "{{ website_description }}",
+        "url": "https://{{ website_url }}/blog",
         "author": {
           "@type": "Organization",
-          "name": "AI代码模板团队"
+          "name": "{{ author_name }}"
         },
         "publisher": {
           "@type": "Organization",
           "name": "AI代码模板",
           "logo": {
             "@type": "ImageObject",
-            "url": "https://ai-code-template.com/logo.png"
+            "url": "https://{{ website_url }}/logo.png"
           }
         }
       },
@@ -85,7 +85,7 @@
           "name": "AI代码模板",
           "logo": {
             "@type": "ImageObject",
-            "url": "https://ai-code-template.com/logo.png"
+            "url": "https://{{ website_url }}/logo.png"
           }
         },
         "datePublished": "{datePublished}",
@@ -101,14 +101,14 @@
     }
   },
   "defaults": {
-    "title": "AI代码模板 - 智能前端开发工具",
-    "description": "提供高质量的AI代码模板和前端开发工具，帮助开发者快速构建现代化的Web应用。",
+    "title": "{{ website_title }}",
+    "description": "{{ website_description }}",
     "keywords": ["AI", "代码模板", "前端开发", "React", "Next.js", "开发工具"],
-    "author": "AI代码模板团队",
-    "siteUrl": "https://ai-code-template.com",
+    "author": "{{ author_name }}",
+    "siteUrl": "https://{{ website_url }}",
     "openGraph": {
       "type": "website",
-      "siteName": "AI代码模板",
+      "siteName": "{{ website_title }}",
       "locale": "zh_CN",
       "images": [
         {
@@ -121,8 +121,8 @@
     },
     "twitter": {
       "card": "summary_large_image",
-      "site": "@ai_code_template",
-      "creator": "@ai_code_template"
+      "site": "{% if twitter_handle %}@{{ twitter_handle }}{% else %}@{{ website_url.split('.')[0] }}{% endif %}",
+      "creator": "{% if twitter_handle %}@{{ twitter_handle }}{% else %}@{{ website_url.split('.')[0] }}{% endif %}"
     }
   }
 }

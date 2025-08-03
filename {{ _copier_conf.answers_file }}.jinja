@@ -1,0 +1,18 @@
+# 这个文件记录了用户在使用 copier 模板时的答案
+# 它可以用于更新项目或重新生成项目
+_commit: {{ _copier_conf.vcs_ref | default('HEAD') }}
+_src_path: {{ _copier_conf.src_path }}
+author_email: {{ author_email }}
+author_name: {{ author_name }}
+github_username: {{ github_username }}
+include_claude_config: {{ include_claude_config }}
+project_description: {{ project_description }}
+project_display_name: {{ project_display_name }}
+project_name: {{ project_name }}
+project_version: {{ project_version }}
+repository_url: {{ repository_url }}
+twitter_handle: {{ twitter_handle }}
+use_chinese_docs: {{ use_chinese_docs }}
+website_description: {{ website_description }}
+website_title: {{ website_title }}
+website_url: {{ website_url }}

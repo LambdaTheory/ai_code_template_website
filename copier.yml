@@ -1,0 +1,97 @@
+# Copier template configuration for Next.js AI Code Template
+_templates_suffix: .jinja
+
+# Template metadata
+_min_copier_version: "9.0.0"
+
+# Questions for users
+project_name:
+  type: str
+  help: "项目名称 (英文, 用于包名和目录名)"
+  default: "my-nextjs-app"
+  validator: "{% if not project_name %}项目名称不能为空{% endif %}"
+
+project_display_name:
+  type: str  
+  help: "项目显示名称 (中文, 用于页面显示)"
+  default: "我的 Next.js 应用"
+
+project_description:
+  type: str
+  help: "项目描述"
+  default: "基于 Next.js 15+ 的现代 Web 应用模板"
+
+project_version:
+  type: str
+  help: "项目版本"
+  default: "0.1.0"
+
+author_name:
+  type: str
+  help: "作者姓名"
+  default: "Your Name"
+
+author_email:
+  type: str
+  help: "作者邮箱"
+  default: "your.email@example.com"
+  validator: "{% if '@' not in author_email %}请输入有效的邮箱地址{% endif %}"
+
+website_url:
+  type: str
+  help: "网站URL (不包含 https://)"
+  default: "example.com"
+
+website_title:
+  type: str
+  help: "网站标题"
+  default: "{{ project_display_name }}"
+
+website_description:
+  type: str
+  help: "网站描述 (用于SEO)"
+  default: "{{ project_description }}"
+
+twitter_handle:
+  type: str
+  help: "Twitter用户名 (可选, 不包含@)"
+  default: ""
+
+github_username:
+  type: str
+  help: "GitHub用户名"
+  default: "yourusername"
+
+repository_url:
+  type: str
+  help: "GitHub仓库URL (可选)"
+  default: "https://github.com/{{ github_username }}/{{ project_name }}"
+
+use_chinese_docs:
+  type: bool
+  help: "是否使用中文文档"
+  default: true
+
+# Template tasks
+_tasks:
+  - command: "npm install"
+    description: "安装依赖包"
+    when: true
+
+# Migration tasks for updates
+_migrations:
+  - version: "0.2.0"
+    before:
+      - "echo '正在迁移到新版本...'"
+    after:
+      - "npm install"
+      - "echo '迁移完成'"
+
+# Files and directories to skip during copy
+_skip_if_exists:
+  - ".env.local"
+  - "worklog.md"
+
+# Jinja extensions (移除不必要的扩展)
+# _jinja_extensions:
+#   - "jinja2_time.TimeExtension"
