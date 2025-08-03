@@ -71,7 +71,6 @@ copier update
 - `{{ project_display_name }}` - 项目显示名称（中文）
 - `{{ author_name }}` - 作者姓名
 - `{{ website_url }}` - 网站域名
-- `{{ include_claude_config }}` - 是否包含 Claude 配置
 
 ## 注意事项
 
