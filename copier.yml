@@ -67,11 +67,6 @@ repository_url:
   help: "GitHub仓库URL (可选)"
   default: "https://github.com/{{ github_username }}/{{ project_name }}"
 
-use_chinese_docs:
-  type: bool
-  help: "是否使用中文文档"
-  default: true
-
 # Template tasks
 _tasks:
   - command: "npm install"
@@ -91,3 +86,5 @@ _migrations:
 _skip_if_exists:
   - ".env.local"
   - "worklog.md"
+  - "TODO.md"
+  - "docs"
