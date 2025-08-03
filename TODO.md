@@ -42,3 +42,8 @@ DevOps
 # 再搞一个基于Ant Design的后台模版仓库
 优点：Ant Design的组件库比较丰富
 缺点：体积巨大
+
+# 参考资料
+- https://docs.anthropic.com/en/docs/claude-code/hooks
+- https://docs.anthropic.com/en/docs/claude-code/common-workflows#use-extended-thinking
+- https://docs.anthropic.com/en/docs/claude-code/sub-agents
