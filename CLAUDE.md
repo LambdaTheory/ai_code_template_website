@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## 项目概述
 
-这是一个基于 Next.js 15+ 的现代 Web 应用模板，集成了 TypeScript、Tailwind CSS 和 ShadCN UI 组件库。项目采用 App Router 架构，支持 ISR（增量静态再生成）和 SEO 优化。
+这是一个基于 Next.js 15+ 的现代 Web 应用模板，同时也是一个 **Copier 模板项目**，可以用来生成新的 Next.js 项目。项目集成了 TypeScript、Tailwind CSS 和 ShadCN UI 组件库，采用 App Router 架构，支持 ISR（增量静态再生成）和 SEO 优化。
 
 ## 常用命令
 
@@ -16,6 +16,10 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ### ShadCN UI 组件管理
 - `npx shadcn@latest add <component-name>` - 添加新的 UI 组件
+
+### Copier 模板命令
+- `copier copy . ../new-project` - 从当前模板创建新项目
+- `copier update` - 更新基于此模板的现有项目
 
 ## 项目架构
 

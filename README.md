@@ -10,6 +10,11 @@
 pip install copier
 ```
 
+```bash
+# uv
+uv tool install copier
+```
+
 ### 2. 从本模板创建新项目
 
 ```bash
@@ -17,7 +22,7 @@ pip install copier
 copier copy . /path/to/new/project
 
 # 从 Git 仓库创建（当推送到 Git 后）
-copier copy https://github.com/yourusername/your-template-repo.git /path/to/new/project
+copier copy https://github.com/LambdaTheory/ai_code_template_website.git /path/to/new/project
 ```
 
 ### 3. 回答配置问题

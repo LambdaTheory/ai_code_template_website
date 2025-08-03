@@ -69,8 +69,17 @@ repository_url:
 
 # Template tasks
 _tasks:
-  - command: "npm install"
+  - command: "pnpm install"
     description: "安装依赖包"
+    when: true
+  - command: |
+      # 自动修复 .copier-answers.yml 中的 _src_path
+      if [ -f ".copier-answers.yml" ] && grep -q "copier._vcs.clone" ".copier-answers.yml"; then
+        sed -i.bak 's|_src_path: .*copier._vcs.clone.*|_src_path: https://github.com/LambdaTheory/ai_code_template_website.git|' .copier-answers.yml
+        rm -f .copier-answers.yml.bak
+        echo "已自动修复 .copier-answers.yml 中的模板路径"
+      fi
+    description: "修复 Copier 模板路径"
     when: true
 
 # Migration tasks for updates
@@ -85,6 +94,11 @@ _migrations:
 # Files and directories to skip during copy
 _skip_if_exists:
   - ".env.local"
+  - ".gitignore"
+
+# Files and directories to always skip
+_skip_if:
   - "worklog.md"
   - "TODO.md"
   - "docs"
+  - "README.md"
