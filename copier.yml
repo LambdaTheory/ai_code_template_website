@@ -91,7 +91,3 @@ _migrations:
 _skip_if_exists:
   - ".env.local"
   - "worklog.md"
-
-# Jinja extensions (移除不必要的扩展)
-# _jinja_extensions:
-#   - "jinja2_time.TimeExtension"
