@@ -12,6 +12,19 @@
 - 🌐 **Vercel** deployment ready
 - 📱 **Responsive** design
 - 🌙 **Dark mode** support
+- 🤖 **Claude Code 增强支持**
+  - 🔔 **智能语音提醒** - 任务完成、会话状态变化音效反馈
+  - 📁 **自动化目录维护** - 智能更新项目目录结构文档
+  - ⚡ **自定义命令集**
+    - `/commit` - 智能分析代码变更并生成规范的提交信息
+    - `/brainstorm` - AI 头脑风暴辅助
+    - `/review-promax` - 四模型并行代码审查
+    - `/describe-files` - 自动维护文件描述
+    - `/weather` - 天气查询功能
+  - 🎯 **专业 AI 代理**
+    - **代码审查专家** - 专业的代码质量分析
+    - **调试专家** - 错误诊断和修复建议
+  - 🎣 **智能钩子系统** - 8 种事件钩子，全面监控开发流程
 
 ## 📋 Prerequisites
 
@@ -22,30 +35,18 @@
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/yourusername/ai-code-template-website
+   git clone https://github.com/LambdaTheory/ai-code-template-website
    cd ai-code-template-website
    ```
 
 2. **Install dependencies**
    ```bash
-   npm install
-   # or
-   yarn install
-   # or
    pnpm install
-   # or
-   bun install
    ```
 
 3. **Start the development server**
    ```bash
-   npm run dev
-   # or
-   yarn dev
-   # or
    pnpm dev
-   # or
-   bun dev
    ```
 
 4. **Open your browser**
@@ -53,23 +54,7 @@
    Visit [http://localhost:3000](http://localhost:3000) to see the application.
 
 ## 📁 Project Structure
-
-```
-src/
-├── app/
-│   ├── globals.css          # Global styles with Tailwind
-│   ├── layout.tsx          # Root layout component
-│   ├── page.tsx            # Home page
-│   └── isr-demo/           # ISR demonstration page
-│       └── page.tsx
-├── components/
-│   └── ui/                 # ShadCN UI components
-│       ├── button.tsx
-│       ├── card.tsx
-│       └── ...
-└── lib/
-    └── utils.ts            # Utility functions
-```
+[参考](docs/目录结构.md)
 
 ## 🎨 ShadCN UI Components
 
