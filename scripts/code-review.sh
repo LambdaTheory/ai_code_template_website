@@ -1,9 +1,5 @@
 #!/bin/bash
-
-# Code Review Script
 # 使用 Amazon Q 对代码进行智能审查
-# 作者: Claude Code
-# 版本: 1.0
 
 set -e  # 遇到错误立即退出
 
@@ -23,7 +19,6 @@ load_config() {
     
     # 如果存在配置文件，则加载
     if [[ -f "$config_file" ]]; then
-        info "加载配置文件: $config_file"
         # 安全地读取配置，避免代码注入
         while IFS='=' read -r key value; do
             # 跳过注释和空行
@@ -60,25 +55,19 @@ NC='\033[0m' # No Color
 
 # 帮助信息
 show_help() {
-    echo -e "${BLUE}代码审查脚本 - 使用 Amazon Q 进行智能代码审查${NC}"
+    echo -e "${BLUE}代码审查脚本 - 使用 Amazon Q 对 Git Commits 进行代码审查${NC}"
     echo ""
     echo "用法:"
-    echo "  $0 [选项] [文件路径]"
+    echo "  $0 [选项]"
     echo ""
     echo "选项:"
     echo "  -h, --help       显示帮助信息"
-    echo "  -s, --staged     仅审查已暂存的变更 (git diff --staged)"
     echo "  -c, --commits N  审查最近 N 个 commit (默认: 1)"
-    echo "  -a, --all        审查未提交变更 + 最近 1 个 commit"
-    echo "  -q, --quiet      静默模式，减少输出"
     echo "  --account PATH   指定 Amazon Q 账户路径"
     echo ""
     echo "示例:"
-    echo "  $0                           # 审查工作区所有变更"
-    echo "  $0 --staged                  # 审查暂存区变更"
+    echo "  $0                           # 审查最近 1 个 commit"
     echo "  $0 --commits 3               # 审查最近 3 个 commit"
-    echo "  $0 --all                     # 审查未提交变更和最近 1 个 commit"
-    echo "  $0 src/app/page.tsx          # 审查指定文件"
     echo ""
 }
 
@@ -86,13 +75,6 @@ show_help() {
 error_exit() {
     echo -e "${RED}错误: $1${NC}" >&2
     exit 1
-}
-
-# 信息输出函数
-info() {
-    if [[ "$QUIET" != "1" ]]; then
-        echo -e "${BLUE}ℹ️  $1${NC}"
-    fi
 }
 
 # 成功输出函数
@@ -129,101 +111,21 @@ check_prerequisites() {
     fi
 }
 
-# 验证文件路径安全性
-validate_file_path() {
-    local file_path="$1"
-    
-    # 检查路径是否包含危险字符
-    if [[ "$file_path" =~ \.\./|^/|^\~ ]]; then
-        error_exit "不允许的文件路径（安全限制）: $file_path"
-    fi
-    
-    # 确保文件在当前项目目录下
-    local real_path
-    real_path=$(realpath "$file_path" 2>/dev/null) || error_exit "无效的文件路径: $file_path"
-    local project_root
-    project_root=$(git rev-parse --show-toplevel 2>/dev/null) || error_exit "无法确定项目根目录"
-    
-    if [[ ! "$real_path" == "$project_root"* ]]; then
-        error_exit "文件必须在项目目录内: $file_path"
-    fi
-}
-
-# 安全地读取文件内容
-safe_read_file() {
-    local file_path="$1"
-    validate_file_path "$file_path"
-    
-    if [[ ! -f "$file_path" ]]; then
-        error_exit "文件不存在: $file_path"
-    fi
-    
-    # 检查文件大小（限制在1MB以内）
-    local file_size
-    file_size=$(stat -f%z "$file_path" 2>/dev/null || stat -c%s "$file_path" 2>/dev/null || echo "0")
-    if [[ "$file_size" -gt 1048576 ]]; then
-        error_exit "文件过大（超过1MB），无法审查: $file_path"
-    fi
-    
-    cat "$file_path" 2>/dev/null || error_exit "无法读取文件内容: $file_path"
-}
 
 # 获取代码变更
 get_code_changes() {
     local changes=""
     
-    if [[ -n "$TARGET_FILE" ]]; then
-        # 审查指定文件
-        info "获取文件内容: $TARGET_FILE"
-        changes=$(safe_read_file "$TARGET_FILE")
-        echo "# 文件内容: $TARGET_FILE"$'\n```\n'"$changes"$'\n```'
-    elif [[ "$REVIEW_MODE" == "staged" ]]; then
-        # 审查暂存区
-        info "获取暂存区变更..."
-        changes=$(git diff --staged)
-        if [[ -z "$changes" ]]; then
-            error_exit "暂存区没有变更"
-        fi
-        echo "# Git 暂存区变更"$'\n```diff\n'"$changes"$'\n```'
-    elif [[ "$REVIEW_MODE" == "commits" ]]; then
-        # 审查最近的 commits
-        info "获取最近 $COMMIT_COUNT 个 commit 的变更..."
-        if ! git rev-parse HEAD~$((COMMIT_COUNT-1)) &>/dev/null; then
-            error_exit "仓库中没有足够的 commit 历史"
-        fi
-        changes=$(git diff HEAD~$COMMIT_COUNT..HEAD)
-        if [[ -z "$changes" ]]; then
-            warn "最近 $COMMIT_COUNT 个 commit 没有变更"
-            return 1
-        fi
-        echo "# 最近 $COMMIT_COUNT 个 commit 的变更"$'\n```diff\n'"$changes"$'\n```'
-    elif [[ "$REVIEW_MODE" == "all" ]]; then
-        # 审查所有变更
-        info "获取所有变更（未提交 + 最近 1 个 commit）..."
-        local uncommitted=$(git diff)
-        local last_commit=$(git diff HEAD~1..HEAD)
-        
-        changes=""
-        if [[ -n "$uncommitted" ]]; then
-            changes+="# 未提交的变更"$'\n```diff\n'"$uncommitted"$'\n```\n\n'
-        fi
-        if [[ -n "$last_commit" ]]; then
-            changes+="# 最近 1 个 commit 的变更"$'\n```diff\n'"$last_commit"$'\n```'
-        fi
-        
-        if [[ -z "$changes" ]]; then
-            error_exit "没有找到任何变更"
-        fi
-        echo "$changes"
-    else
-        # 默认：审查工作区变更
-        info "获取工作区变更..."
-        changes=$(git diff)
-        if [[ -z "$changes" ]]; then
-            error_exit "工作区没有变更"
-        fi
-        echo "# Git 工作区变更"$'\n```diff\n'"$changes"$'\n```'
+    # 审查最近的 commits
+    if ! git rev-parse HEAD~$((COMMIT_COUNT-1)) &>/dev/null; then
+        error_exit "仓库中没有足够的 commit 历史"
     fi
+    changes=$(git diff HEAD~$COMMIT_COUNT..HEAD)
+    if [[ -z "$changes" ]]; then
+        warn "最近 $COMMIT_COUNT 个 commit 没有变更"
+        return 1
+    fi
+    echo "# 最近 $COMMIT_COUNT 个 commit 的变更"$'\n```diff\n'"$changes"$'\n```'
 }
 
 # 构建审查提示词
@@ -290,9 +192,6 @@ run_amazon_q_review() {
     # 将提示词写入临时文件，避免命令行注入
     printf '%s' "$prompt" > "$temp_file" || error_exit "无法写入临时文件"
     
-    info "启动 Amazon Q 容器进行代码审查..."
-    info "使用镜像: $Q_IMAGE"
-    
     # 验证容器镜像名称（基本安全检查）
     if [[ ! "$Q_IMAGE" =~ ^[a-zA-Z0-9._/-]+:[a-zA-Z0-9._-]+$ ]] && [[ ! "$Q_IMAGE" =~ ^[a-zA-Z0-9._/-]+$ ]]; then
         error_exit "无效的容器镜像名称: $Q_IMAGE"
@@ -332,10 +231,7 @@ run_amazon_q_review() {
 # 主函数
 main() {
     # 解析命令行参数
-    REVIEW_MODE="default"
     COMMIT_COUNT=1
-    QUIET=0
-    TARGET_FILE=""
     OVERRIDE_ACCOUNT_PATH=""
     
     while [[ $# -gt 0 ]]; do
@@ -344,25 +240,12 @@ main() {
                 show_help
                 exit 0
                 ;;
-            -s|--staged)
-                REVIEW_MODE="staged"
-                shift
-                ;;
             -c|--commits)
-                REVIEW_MODE="commits"
                 COMMIT_COUNT="$2"
                 if ! [[ "$COMMIT_COUNT" =~ ^[0-9]+$ ]] || [[ "$COMMIT_COUNT" -lt 1 ]]; then
                     error_exit "commit 数量必须是正整数"
                 fi
                 shift 2
-                ;;
-            -a|--all)
-                REVIEW_MODE="all"
-                shift
-                ;;
-            -q|--quiet)
-                QUIET=1
-                shift
                 ;;
             --account)
                 OVERRIDE_ACCOUNT_PATH="$2"
@@ -372,11 +255,7 @@ main() {
                 error_exit "未知选项: $1"
                 ;;
             *)
-                if [[ -n "$TARGET_FILE" ]]; then
-                    error_exit "只能指定一个文件路径"
-                fi
-                TARGET_FILE="$1"
-                shift
+                error_exit "不支持的参数: $1"
                 ;;
         esac
     done
@@ -387,13 +266,6 @@ main() {
     # 命令行参数覆盖配置文件
     if [[ -n "$OVERRIDE_ACCOUNT_PATH" ]]; then
         Q_ACCOUNT_PATH="$OVERRIDE_ACCOUNT_PATH"
-    fi
-    
-    # 显示欢迎信息
-    if [[ "$QUIET" != "1" ]]; then
-        echo -e "${BLUE}🔍 代码审查工具 - Amazon Q 驱动${NC}"
-        echo "=================================="
-        echo ""
     fi
     
     # 检查前置条件
@@ -408,7 +280,6 @@ main() {
     review_prompt=$(build_review_prompt "$code_changes")
     
     # 执行审查
-    info "开始代码审查..."
     echo ""
     
     if run_amazon_q_review "$review_prompt"; then

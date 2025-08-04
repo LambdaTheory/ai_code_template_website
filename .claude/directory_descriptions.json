@@ -1,8 +1,5 @@
 {
-  "ignore": [
-    ".claude/voice/girl",
-    ".claude/voice/man"
-  ],
+  "ignore": [".claude/voice/girl", ".claude/voice/man"],
   "descriptions": {
     "src/app/page.tsx": "应用首页组件，展示项目功能特性和导航链接的主页面",
     "src/app/layout.tsx": "根布局组件，定义了应用的全局布局、字体和元数据配置",
@@ -92,14 +89,10 @@
     ".claude/commands/review-promax.md": "ProMax代码审查命令文档，定义了使用四个AI模型并行审查代码的高级命令",
     ".claude/commands/setup-docker-ci-workflow.md": "Docker CI工作流设置命令文档，说明如何创建GitHub Actions自动构建和推送Docker镜像到GHCR",
     ".claude/commands/weather.md": "天气查询命令文档，提供简单的天气信息查询功能的命令配置",
-    "README.md.jinja": "项目说明文档模板，Copier模板中的动态README生成文件，包含项目介绍和使用指南",
     "TEMPLATE_USAGE.md": "Copier模板使用说明文档，介绍如何使用此项目作为模板创建新的Next.js项目",
     "TODO.md": "项目待办事项文档，记录了计划实现的功能和改进想法的清单",
     "copier.yml": "Copier模板配置文件，定义了模板的问题、变量、任务和迁移规则",
     "docs/测试用例.md": "测试用例文档，记录了项目中实现的一些功能示例和想法",
-    "package.json.jinja": "项目包配置模板，Copier模板中的动态package.json生成文件，包含依赖和脚本配置",
-    "src/config/seo.json.jinja": "SEO配置模板，Copier模板中的动态SEO配置生成文件，包含网站元数据和结构化数据",
-    "{{ _copier_conf.answers_file }}.jinja": "Copier答案文件模板，记录用户在使用模板时的配置选择，用于项目更新和重新生成",
     ".claude/agents/debugger.md": "调试AI代理配置文件，定义了专门用于调试和问题排查的AI代理功能和工具权限",
     ".claude/agents/describe-files.md": "文件描述AI代理配置文件，定义了专门用于维护项目文件描述和目录结构的AI代理",
     ".claude/commands/brainstorm.md": "头脑风暴命令文档，定义了用于创意思考和解决方案生成的Claude Code自定义命令",
