@@ -257,8 +257,6 @@ class DirectoryTreeGenerator:
 - 使用 `python generate_structure.py` 生成目录结构
 - 使用 `python generate_structure.py --add <文件路径> "<描述>"` 添加文件描述
 - 使用 `python generate_structure.py --missing` 查看缺少描述的文件
-
-最后更新：{self.get_current_time()}
 """
         
         # 确保输出目录存在
@@ -282,11 +280,6 @@ class DirectoryTreeGenerator:
                 print(f"  python generate_structure.py --add '{path}' '<描述>'")
             if len(missing) > 3:
                 print(f"  ... 还有 {len(missing) - 3} 个文件")
-    
-    def get_current_time(self) -> str:
-        """获取当前时间字符串"""
-        from datetime import datetime
-        return datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     
     def show_missing_only(self):
         """仅显示缺少描述的文件"""

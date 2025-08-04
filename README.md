@@ -1,79 +1,196 @@
-# Copier 模板使用说明
+# AI 代码模板网站
 
-这个项目已经被配置为 Copier 模板，可以用来快速创建新的 Next.js 项目。
+基于 Next.js 15+ 的现代 Web 应用模板
 
-## 使用方法
+## 🚀 Features
 
-### 1. 安装 Copier
+- ⚡ **Next.js 15+** with App Router
+- 🔷 **TypeScript** support
+- 🎨 **Tailwind CSS** for styling
+- 🎯 **ShadCN UI** component library
+- 🔄 **ISR** (Incremental Static Regeneration) enabled
+- 🌐 **Vercel** deployment ready
+- 📱 **Responsive** design
+- 🌙 **Dark mode** support
 
-```bash
-pip install copier
+## 📋 Prerequisites
+
+- Node.js 18.x or later
+- npm, yarn, pnpm, or bun
+
+## 🛠️ Getting Started
+
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/yourusername/ai-code-template-website
+   cd ai-code-template-website
+   ```
+
+2. **Install dependencies**
+   ```bash
+   npm install
+   # or
+   yarn install
+   # or
+   pnpm install
+   # or
+   bun install
+   ```
+
+3. **Start the development server**
+   ```bash
+   npm run dev
+   # or
+   yarn dev
+   # or
+   pnpm dev
+   # or
+   bun dev
+   ```
+
+4. **Open your browser**
+   
+   Visit [http://localhost:3000](http://localhost:3000) to see the application.
+
+## 📁 Project Structure
+
+```
+src/
+├── app/
+│   ├── globals.css          # Global styles with Tailwind
+│   ├── layout.tsx          # Root layout component
+│   ├── page.tsx            # Home page
+│   └── isr-demo/           # ISR demonstration page
+│       └── page.tsx
+├── components/
+│   └── ui/                 # ShadCN UI components
+│       ├── button.tsx
+│       ├── card.tsx
+│       └── ...
+└── lib/
+    └── utils.ts            # Utility functions
 ```
 
-```bash
-# uv
-uv tool install copier
+## 🎨 ShadCN UI Components
+
+This template includes pre-configured ShadCN UI components:
+
+- **Button** - Customizable button component
+- **Card** - Card layout component
+- More components can be added using: `npx shadcn@latest add <component-name>`
+
+## 🔄 ISR (Incremental Static Regeneration)
+
+The template includes ISR configuration:
+
+- **Example page**: `/isr-demo` - Demonstrates ISR with 60-second revalidation
+- **Configuration**: Set `revalidate` export in page components
+- **Benefits**: Static generation with periodic updates
+
+## 🌐 Deployment
+
+### Vercel (Recommended)
+
+1. **Push to GitHub**
+   ```bash
+   git add .
+   git commit -m "Initial commit"
+   git push origin main
+   ```
+
+2. **Deploy to Vercel**
+   - Visit [vercel.com](https://vercel.com)
+   - Import your GitHub repository
+   - Deploy automatically
+
+3. **Manual deployment**
+   ```bash
+   npm run build
+   vercel deploy
+   ```
+
+### Other Platforms
+
+The application can be deployed to any platform supporting Next.js:
+- Netlify
+- AWS
+- Google Cloud
+- Railway
+- Render
+
+## 📝 Available Scripts
+
+- `npm run dev` - Start development server with Turbopack
+- `npm run build` - Build for production
+- `npm run start` - Start production server
+- `npm run lint` - Run ESLint
+
+## 🔧 Configuration
+
+### Tailwind CSS
+Configuration in `tailwind.config.js` and `src/app/globals.css`
+
+### ShadCN UI
+Configuration in `components.json`
+
+### Next.js
+Configuration in `next.config.ts` with ISR and caching optimizations
+
+### Vercel
+Configuration in `vercel.json` for deployment settings
+
+## 🎯 Usage Examples
+
+### Adding ISR to a Page
+
+```typescript
+// Set revalidation time (in seconds)
+export const revalidate = 60;
+
+export default async function MyPage() {
+  // Your page content
+}
 ```
 
-### 2. 从本模板创建新项目
+### Using ShadCN Components
 
-```bash
-# 从本地路径创建
-copier copy . /path/to/new/project
+```typescript
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
-# 从 Git 仓库创建（当推送到 Git 后）
-copier copy https://github.com/LambdaTheory/ai_code_template_website.git /path/to/new/project
+export default function MyComponent() {
+  return (
+    <Card>
+      <CardHeader>
+        <CardTitle>My Card</CardTitle>
+      </CardHeader>
+      <CardContent>
+        <Button>Click me</Button>
+      </CardContent>
+    </Card>
+  );
+}
 ```
 
-### 3. 回答配置问题
+## 📚 Learn More
 
-模板会询问以下问题：
+- [Next.js Documentation](https://nextjs.org/docs)
+- [Tailwind CSS Documentation](https://tailwindcss.com/docs)
+- [ShadCN UI Documentation](https://ui.shadcn.com)
+- [Vercel Documentation](https://vercel.com/docs)
 
-- **项目名称**: 用于 package.json 和目录名
-- **项目显示名称**: 用于页面显示的中文名称  
-- **项目描述**: 项目的简短描述
-- **作者信息**: 姓名和邮箱
-- **网站配置**: URL、标题、描述等
-- **可选功能**: 是否包含 Claude Code 配置等
+## 🤝 Contributing
 
-### 4. 生成的项目结构
+1. Fork the repository
+2. Create your feature branch: `git checkout -b feature/amazing-feature`
+3. Commit your changes: `git commit -m 'Add amazing feature'`
+4. Push to the branch: `git push origin feature/amazing-feature`
+5. Open a Pull Request
 
-生成的项目将包含：
-- ✅ Next.js 15+ 配置
-- ✅ TypeScript 支持
-- ✅ Tailwind CSS + ShadCN UI
-- ✅ SEO 优化配置
-- ✅ 自定义的项目信息
-- ⚙️ 可选的 Claude Code 配置
+## 📄 License
 
-## 更新现有项目
+This project is licensed under the MIT License.
 
-如果模板有更新，可以更新现有项目：
+---
 
-```bash
-cd /path/to/existing/project
-copier update
-```
-
-## 模板开发
-
-### 已模板化的文件
-
-以下文件已经支持 Jinja2 模板变量：
-- `package.json.jinja` - 项目基础信息
-- `README.md.jinja` - 项目说明文档  
-- `src/config/seo.json.jinja` - SEO 配置
-
-### 变量说明
-
-主要模板变量：
-- `{{ project_name }}` - 项目名称（英文）
-- `{{ project_display_name }}` - 项目显示名称（中文）
-- `{{ author_name }}` - 作者姓名
-- `{{ website_url }}` - 网站域名
-
-## 注意事项
-
-1. **不要手动修改 `.claude` 目录结构** - 这会破坏 Claude Code 的钩子脚本
-2. **模板变量使用 Jinja2 语法** - 确保语法正确
-3. **答案文件自动生成** - 用于跟踪用户选择和后续更新
+Built with ❤️ using Next.js, Tailwind CSS, and ShadCN UI
