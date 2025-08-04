@@ -5,50 +5,51 @@ allowed-tools: Read,Write,Edit,Bash,Task
 
 我需要根据项目中的修改内容，自动生成语义化的 commit 信息并提交到 Git 仓库。
 
+严格按照以下顺序执行，不跳过任何步骤：
+
 ## 执行步骤
 
-### 1. 预处理
+1. **预处理**：
+   - 执行 `npm run format` 修复格式问题
+   - 使用 Task 工具调用 describe-files subagent 更新文件结构表：
+     ```
+     Task(subagent_type="general-purpose", description="更新文件结构表", prompt="请调用 describe-files subagent 来更新项目的文件结构表...")
+     ```
 
-- 执行 `npm run format` 修复格式问题
-- 通过 Task 工具调用 describe-files subagent 更新文件结构表
+2. **分析修改状态**：
+   并行执行以下命令：
 
-### 2. 分析修改状态
+   ```bash
+   git status
+   git diff
+   git diff --staged
+   ```
 
-使用以下命令分析当前修改：
+3. **了解项目 commit 风格**：
 
-- `git status` - 查看修改状态
-- `git diff` - 查看未暂存修改
-- `git diff --staged` - 查看已暂存修改
+   ```bash
+   git log --oneline -5
+   ```
 
-### 3. 了解项目 commit 风格
+4. **生成语义化 commit 信息**：
+   根据修改内容选择类型前缀：
+   - `feat`: 新功能 | `fix`: 修复问题 | `refactor`: 重构代码
+   - `perf`: 性能优化 | `style`: 代码格式调整 | `docs`: 文档更新
+   - `test`: 测试相关 | `chore`: 构建/工具/依赖更新
 
-`git log --oneline -5` - 查看最近5次提交记录
+   格式：`类型(作用域): 简洁的中文描述`
+   忽略文件：`.claude/directory_descriptions.json` 和 `docs/目录结构.md`
 
-### 4. 生成语义化 commit 信息
+5. **提交变更**：
 
-分析代码变更性质，选择合适的类型前缀：
+   ```bash
+   git add .
+   ```
 
-- `feat`: 新功能
-- `fix`: 修复问题
-- `refactor`: 重构代码
-- `perf`: 性能优化
-- `style`: 代码格式调整
-- `docs`: 文档更新
-- `test`: 测试相关
-- `chore`: 构建/工具/依赖更新
+   创建 commit
 
-**格式规范**：
-
-- 使用格式：`类型(作用域): 简洁的中文描述`
-- 重大变更添加标记：`feat!: 描述`
-- 忽略自动生成的文件变动：`.claude/directory_descriptions.json` 和 `docs/目录结构.md`
-
-### 5. 提交变更
-
-- `git add .` - 添加所有相关文件到暂存区
-- 创建 commit 并包含规范的尾部信息
-
-### 6. 验证提交
-
-- `git status` - 确认工作区状态
-- `git log --oneline -1` - 查看最新提交记录
+6. **验证提交**：
+   ```bash
+   git status
+   git log --oneline -1
+   ```
