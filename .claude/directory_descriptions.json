@@ -1,5 +1,8 @@
 {
-  "ignore": [".claude/voice/girl", ".claude/voice/man"],
+  "ignore": [
+    ".claude/voice/girl",
+    ".claude/voice/man"
+  ],
   "descriptions": {
     "src/app/page.tsx": "应用首页组件，展示项目功能特性和导航链接的主页面",
     "src/app/layout.tsx": "根布局组件，定义了应用的全局布局、字体和元数据配置",
@@ -96,6 +99,15 @@
     "docs/测试用例.md": "测试用例文档，记录了项目中实现的一些功能示例和想法",
     "package.json.jinja": "项目包配置模板，Copier模板中的动态package.json生成文件，包含依赖和脚本配置",
     "src/config/seo.json.jinja": "SEO配置模板，Copier模板中的动态SEO配置生成文件，包含网站元数据和结构化数据",
-    "{{ _copier_conf.answers_file }}.jinja": "Copier答案文件模板，记录用户在使用模板时的配置选择，用于项目更新和重新生成"
+    "{{ _copier_conf.answers_file }}.jinja": "Copier答案文件模板，记录用户在使用模板时的配置选择，用于项目更新和重新生成",
+    ".claude/agents/debugger.md": "调试AI代理配置文件，定义了专门用于调试和问题排查的AI代理功能和工具权限",
+    ".claude/agents/describe-files.md": "文件描述AI代理配置文件，定义了专门用于维护项目文件描述和目录结构的AI代理",
+    ".claude/commands/brainstorm.md": "头脑风暴命令文档，定义了用于创意思考和解决方案生成的Claude Code自定义命令",
+    ".github": "GitHub集成目录，包含GitHub Actions工作流和自动化CI/CD配置文件",
+    ".github/workflows": "GitHub Actions工作流目录，存放自动化构建、测试和部署的YAML配置文件",
+    ".prettierignore": "Prettier忽略文件配置，定义了不需要进行代码格式化的文件和目录",
+    ".prettierrc": "Prettier代码格式化配置文件，定义了JavaScript、TypeScript、CSS等文件的格式化规则",
+    "docs/specs": "技术规范文档目录，存放项目开发标准、代码规范和技术要求文档",
+    "docs/specs/code_review_standards.md": "代码审查标准文档，定义了项目代码审查的规范、流程和质量要求"
   }
 }
