@@ -5,6 +5,9 @@ allowed-tools: Read,Write,Edit,Bash
 
 我需要根据项目中的修改内容，自动生成语义化的 commit 信息并提交到 Git 仓库。
 
+0. 执行 !`npm run format` 修复格式问题。
+   0.5 通过 Agent describe-files 来更新文件结构表。
+
 1. 分析当前修改状态：使用 git status、git diff 和 git diff --staged
 
 2. 检查最近的 commit 历史了解项目的 commit 风格：git log --oneline -5
@@ -21,6 +24,7 @@ allowed-tools: Read,Write,Edit,Bash
      - chore: 构建/工具/依赖更新
    - 使用格式：`类型(作用域): 简洁的中文描述`
    - 如果有重大变更，添加标记：`feat!: 描述`
+   - 无视 .claude/directory_descriptions.json 和 docs/目录结构.md 的变动
 
 4. 添加所有相关文件到暂存区：git add .
 
