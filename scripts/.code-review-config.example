@@ -1,0 +1,18 @@
+# Code Review Script Configuration File
+# 代码审查脚本配置文件
+#
+# 使用方法：
+# 1. 复制此文件到 ~/.code-review-config
+# 2. 根据您的环境修改下面的配置
+
+# Amazon Q 账户路径
+# 默认: ~/.local/share/amazon-q
+Q_ACCOUNT_PATH="/Users/kun/Downloads/q-accounts/E7PXRUEPGAVP"
+
+# Amazon Q 容器镜像
+# 默认: ghcr.io/kun-g/q:latest
+Q_IMAGE="ghcr.io/kun-g/q:latest"
+
+# 代码审查标准文件路径
+# 默认: docs/specs/code_review_standards.md
+REVIEW_STANDARDS_FILE="docs/specs/code_review_standards.md"
