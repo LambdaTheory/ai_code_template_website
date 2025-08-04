@@ -1,3 +1,10 @@
+# 验收
+使用 [测试用例](docs/测试用例.md) 中的用例来测试效果。
+
+# Command /setup-cicd
+设置好在 github 上的 CI
+设置好在 Dokploy 上的 CD
+
 # 立足 UserPromptSubmit，把「一句话触发」扩展成高质量提示、上下文或工具调用脚本。
 
 - 固定模板

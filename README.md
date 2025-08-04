@@ -1,6 +1,6 @@
 # AI 代码模板网站
 
-基于 Next.js 15+ 的现代 Web 应用模板
+AI友好的，基于 Next.js 15+ 的应用模板。
 
 ## 🚀 Features
 
