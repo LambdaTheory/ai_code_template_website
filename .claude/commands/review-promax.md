@@ -10,7 +10,7 @@ allowed-tools: Read,Write,Edit,Bash,Task
 
 2. 并行执行四个审查任务：
    - 使用 `codex exec -- full-auto` 进行代码审查，结果保存到 review.codex.md
-   - 使用 `gemini -- yolo` 进行代码审查，结果保存到 review.gemini.md  
+   - 使用 `gemini -- yolo` 进行代码审查，结果保存到 review.gemini.md
    - 使用 Claude 进行代码审查，结果保存到 review.claude.md
    - 使用 `q chat` 进行代码审查，结果保存到 review.q.md
 

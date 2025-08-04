@@ -1,12 +1,23 @@
-import { generateBlogSEOMetadata, generateStructuredData, BlogArticleData } from '@/lib/seo'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import {
+  generateBlogSEOMetadata,
+  generateStructuredData,
+  BlogArticleData,
+} from '@/lib/seo'
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Separator } from '@/components/ui/separator'
 
 // 模拟博客文章数据
 const articleData: BlogArticleData = {
   title: 'Next.js中使用JSON配置SEO的完整指南',
-  description: '详细介绍如何在Next.js项目中通过JSON文件配置SEO元数据，包括结构化数据的实现方法和最佳实践。',
+  description:
+    '详细介绍如何在Next.js项目中通过JSON文件配置SEO元数据，包括结构化数据的实现方法和最佳实践。',
   image: '/images/nextjs-seo-guide.jpg',
   author: '张开发者',
   datePublished: '2024-01-15T10:00:00+08:00',
@@ -51,9 +62,7 @@ export default function BlogSEODemoPage() {
                 📝 当前演示文章信息
                 <Badge variant="secondary">演示数据</Badge>
               </CardTitle>
-              <CardDescription>
-                以下是当前页面使用的SEO配置数据
-              </CardDescription>
+              <CardDescription>以下是当前页面使用的SEO配置数据</CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -68,7 +77,9 @@ export default function BlogSEODemoPage() {
                 <div>
                   <h3 className="font-semibold text-gray-900">发布时间</h3>
                   <p className="text-gray-700">
-                    {new Date(articleData.datePublished).toLocaleDateString('zh-CN')}
+                    {new Date(articleData.datePublished).toLocaleDateString(
+                      'zh-CN'
+                    )}
                   </p>
                 </div>
                 <div>
@@ -76,7 +87,7 @@ export default function BlogSEODemoPage() {
                   <p className="text-gray-700">{articleData.wordCount} 字</p>
                 </div>
               </div>
-              
+
               <div>
                 <h3 className="font-semibold text-gray-900 mb-2">描述</h3>
                 <p className="text-gray-700">{articleData.description}</p>
@@ -85,7 +96,7 @@ export default function BlogSEODemoPage() {
               <div>
                 <h3 className="font-semibold text-gray-900 mb-2">关键词</h3>
                 <div className="flex flex-wrap gap-2">
-                  {articleData.keywords?.map((keyword) => (
+                  {articleData.keywords?.map(keyword => (
                     <Badge key={keyword} variant="outline">
                       {keyword}
                     </Badge>
@@ -101,9 +112,7 @@ export default function BlogSEODemoPage() {
           <Card>
             <CardHeader>
               <CardTitle>🚀 SEO实现特性</CardTitle>
-              <CardDescription>
-                此页面实现的SEO功能列表
-              </CardDescription>
+              <CardDescription>此页面实现的SEO功能列表</CardDescription>
             </CardHeader>
             <CardContent>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -117,7 +126,7 @@ export default function BlogSEODemoPage() {
                     <li>• Canonical URL</li>
                   </ul>
                 </div>
-                
+
                 <div className="space-y-3">
                   <h2 className="font-semibold text-blue-700">🌐 Open Graph</h2>
                   <ul className="space-y-1 text-sm text-gray-700">
@@ -129,7 +138,9 @@ export default function BlogSEODemoPage() {
                 </div>
 
                 <div className="space-y-3">
-                  <h2 className="font-semibold text-purple-700">🐦 Twitter Cards</h2>
+                  <h2 className="font-semibold text-purple-700">
+                    🐦 Twitter Cards
+                  </h2>
                   <ul className="space-y-1 text-sm text-gray-700">
                     <li>• Large image card</li>
                     <li>• 网站和创建者标识</li>
@@ -138,7 +149,9 @@ export default function BlogSEODemoPage() {
                 </div>
 
                 <div className="space-y-3">
-                  <h2 className="font-semibold text-orange-700">📊 结构化数据</h2>
+                  <h2 className="font-semibold text-orange-700">
+                    📊 结构化数据
+                  </h2>
                   <ul className="space-y-1 text-sm text-gray-700">
                     <li>• BlogPosting Schema</li>
                     <li>• Organization Schema</li>
@@ -156,9 +169,7 @@ export default function BlogSEODemoPage() {
           <Card>
             <CardHeader>
               <CardTitle>⚙️ JSON配置文件结构</CardTitle>
-              <CardDescription>
-                查看SEO配置的JSON文件结构
-              </CardDescription>
+              <CardDescription>查看SEO配置的JSON文件结构</CardDescription>
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
@@ -168,11 +179,11 @@ export default function BlogSEODemoPage() {
                     src/config/seo.json
                   </code>
                 </div>
-                
+
                 <div className="bg-gray-50 p-4 rounded-lg">
                   <h3 className="font-semibold mb-2">使用方式</h3>
                   <pre className="text-sm bg-gray-100 p-3 rounded overflow-x-auto">
-{`import { generateBlogSEOMetadata } from '@/lib/seo'
+                    {`import { generateBlogSEOMetadata } from '@/lib/seo'
 
 const articleData = {
   title: '文章标题',
@@ -206,10 +217,10 @@ export const metadata = generateBlogSEOMetadata(articleData)`}
               </div>
               <div className="mt-4 p-3 bg-blue-50 rounded-lg">
                 <p className="text-sm text-blue-800">
-                  💡 <strong>提示：</strong> 您可以使用 
-                  <a 
-                    href="https://search.google.com/test/rich-results" 
-                    target="_blank" 
+                  💡 <strong>提示：</strong> 您可以使用
+                  <a
+                    href="https://search.google.com/test/rich-results"
+                    target="_blank"
                     rel="noopener noreferrer"
                     className="underline mx-1"
                   >
@@ -227,9 +238,7 @@ export const metadata = generateBlogSEOMetadata(articleData)`}
           <Card>
             <CardHeader>
               <CardTitle>💡 SEO最佳实践</CardTitle>
-              <CardDescription>
-                实施SEO时的重要注意事项
-              </CardDescription>
+              <CardDescription>实施SEO时的重要注意事项</CardDescription>
             </CardHeader>
             <CardContent>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -245,7 +254,7 @@ export const metadata = generateBlogSEOMetadata(articleData)`}
                     <li>• 使用正确的H1-H6标题层级</li>
                   </ul>
                 </div>
-                
+
                 <div className="space-y-3">
                   <h2 className="font-semibold text-red-700">❌ 避免做法</h2>
                   <ul className="space-y-2 text-sm text-gray-700">

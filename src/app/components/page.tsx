@@ -1,27 +1,47 @@
-"use client";
+'use client'
 
-import { useState } from "react";
-import Link from "next/link";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Checkbox } from "@/components/ui/checkbox";
-import { Switch } from "@/components/ui/switch";
-import { Badge } from "@/components/ui/badge";
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Separator } from "@/components/ui/separator";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Progress } from "@/components/ui/progress";
-import { AlertCircle, CheckCircle, Info, Heart, Star, Settings, User } from "lucide-react";
+import { useState } from 'react'
+import Link from 'next/link'
+import { Button } from '@/components/ui/button'
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card'
+import { Input } from '@/components/ui/input'
+import { Textarea } from '@/components/ui/textarea'
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select'
+import { Checkbox } from '@/components/ui/checkbox'
+import { Switch } from '@/components/ui/switch'
+import { Badge } from '@/components/ui/badge'
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { Separator } from '@/components/ui/separator'
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
+import { Progress } from '@/components/ui/progress'
+import {
+  AlertCircle,
+  CheckCircle,
+  Info,
+  Heart,
+  Star,
+  Settings,
+  User,
+} from 'lucide-react'
 
 export default function ComponentsPage() {
-  const [progress, setProgress] = useState(65);
-  const [isChecked, setIsChecked] = useState(false);
-  const [isToggled, setIsToggled] = useState(false);
-  const [selectedValue, setSelectedValue] = useState("");
+  const [progress, setProgress] = useState(65)
+  const [isChecked, setIsChecked] = useState(false)
+  const [isToggled, setIsToggled] = useState(false)
+  const [selectedValue, setSelectedValue] = useState('')
 
   return (
     <div className="min-h-screen bg-background p-8">
@@ -40,7 +60,11 @@ export default function ComponentsPage() {
                 <Link href="/">返回首页</Link>
               </Button>
               <Button variant="outline" asChild>
-                <a href="https://ui.shadcn.com" target="_blank" rel="noopener noreferrer">
+                <a
+                  href="https://ui.shadcn.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   官方文档
                 </a>
               </Button>
@@ -88,9 +112,18 @@ export default function ComponentsPage() {
                   <div className="space-y-2">
                     <p className="text-sm font-medium">带图标：</p>
                     <div className="flex flex-wrap gap-2">
-                      <Button><Heart className="mr-2 h-4 w-4" />喜欢</Button>
-                      <Button variant="outline"><Star className="mr-2 h-4 w-4" />收藏</Button>
-                      <Button variant="ghost"><Settings className="mr-2 h-4 w-4" />设置</Button>
+                      <Button>
+                        <Heart className="mr-2 h-4 w-4" />
+                        喜欢
+                      </Button>
+                      <Button variant="outline">
+                        <Star className="mr-2 h-4 w-4" />
+                        收藏
+                      </Button>
+                      <Button variant="ghost">
+                        <Settings className="mr-2 h-4 w-4" />
+                        设置
+                      </Button>
                     </div>
                   </div>
                 </CardContent>
@@ -113,7 +146,10 @@ export default function ComponentsPage() {
                   </div>
                   <div className="space-y-2">
                     <label className="text-sm font-medium">选择器：</label>
-                    <Select value={selectedValue} onValueChange={setSelectedValue}>
+                    <Select
+                      value={selectedValue}
+                      onValueChange={setSelectedValue}
+                    >
                       <SelectTrigger>
                         <SelectValue placeholder="选择一个选项" />
                       </SelectTrigger>
@@ -126,18 +162,20 @@ export default function ComponentsPage() {
                   </div>
                   <div className="flex items-center space-x-4">
                     <div className="flex items-center space-x-2">
-                      <Checkbox 
-                        id="checkbox" 
+                      <Checkbox
+                        id="checkbox"
                         checked={isChecked}
-                        onCheckedChange={(checked) => setIsChecked(checked === true)}
+                        onCheckedChange={checked =>
+                          setIsChecked(checked === true)
+                        }
                       />
                       <label htmlFor="checkbox" className="text-sm font-medium">
                         复选框
                       </label>
                     </div>
                     <div className="flex items-center space-x-2">
-                      <Switch 
-                        id="switch" 
+                      <Switch
+                        id="switch"
                         checked={isToggled}
                         onCheckedChange={setIsToggled}
                       />
@@ -165,11 +203,16 @@ export default function ComponentsPage() {
                     <p className="text-sm font-medium">头像：</p>
                     <div className="flex gap-2">
                       <Avatar>
-                        <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
+                        <AvatarImage
+                          src="https://github.com/shadcn.png"
+                          alt="@shadcn"
+                        />
                         <AvatarFallback>CN</AvatarFallback>
                       </Avatar>
                       <Avatar>
-                        <AvatarFallback><User className="h-4 w-4" /></AvatarFallback>
+                        <AvatarFallback>
+                          <User className="h-4 w-4" />
+                        </AvatarFallback>
                       </Avatar>
                       <Avatar>
                         <AvatarFallback>用户</AvatarFallback>
@@ -198,20 +241,22 @@ export default function ComponentsPage() {
                   <div className="space-y-2">
                     <div className="flex justify-between">
                       <span className="text-sm font-medium">当前进度</span>
-                      <span className="text-sm text-muted-foreground">{progress}%</span>
+                      <span className="text-sm text-muted-foreground">
+                        {progress}%
+                      </span>
                     </div>
                     <Progress value={progress} className="w-full" />
                   </div>
                   <div className="flex gap-2">
-                    <Button 
-                      size="sm" 
+                    <Button
+                      size="sm"
                       onClick={() => setProgress(Math.max(0, progress - 10))}
                       disabled={progress === 0}
                     >
                       -10
                     </Button>
-                    <Button 
-                      size="sm" 
+                    <Button
+                      size="sm"
                       onClick={() => setProgress(Math.min(100, progress + 10))}
                       disabled={progress === 100}
                     >
@@ -238,7 +283,7 @@ export default function ComponentsPage() {
                     这是一个一般信息提示，用于告知用户相关信息。
                   </AlertDescription>
                 </Alert>
-                
+
                 <Alert>
                   <CheckCircle className="h-4 w-4" />
                   <AlertTitle>成功</AlertTitle>
@@ -246,7 +291,7 @@ export default function ComponentsPage() {
                     操作已成功完成！您的更改已保存。
                   </AlertDescription>
                 </Alert>
-                
+
                 <Alert>
                   <AlertCircle className="h-4 w-4" />
                   <AlertTitle>警告</AlertTitle>
@@ -263,7 +308,9 @@ export default function ComponentsPage() {
             <Card>
               <CardHeader>
                 <CardTitle>使用文档</CardTitle>
-                <CardDescription>如何在项目中使用 ShadCN UI 组件</CardDescription>
+                <CardDescription>
+                  如何在项目中使用 ShadCN UI 组件
+                </CardDescription>
               </CardHeader>
               <CardContent className="space-y-6">
                 <div className="space-y-4">
@@ -284,7 +331,7 @@ export default function ComponentsPage() {
                   <h3 className="text-lg font-semibold">基本使用</h3>
                   <div className="bg-muted p-4 rounded-lg">
                     <pre className="text-sm">
-{`import { Button } from "@/components/ui/button";
+                      {`import { Button } from "@/components/ui/button";
 
 export default function MyComponent() {
   return (
@@ -303,10 +350,20 @@ export default function MyComponent() {
                   <h3 className="text-lg font-semibold">已安装的组件</h3>
                   <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
                     {[
-                      'Button', 'Card', 'Input', 'Textarea', 'Select', 
-                      'Checkbox', 'Switch', 'Badge', 'Alert', 'Tabs',
-                      'Separator', 'Avatar', 'Progress'
-                    ].map((component) => (
+                      'Button',
+                      'Card',
+                      'Input',
+                      'Textarea',
+                      'Select',
+                      'Checkbox',
+                      'Switch',
+                      'Badge',
+                      'Alert',
+                      'Tabs',
+                      'Separator',
+                      'Avatar',
+                      'Progress',
+                    ].map(component => (
                       <Badge key={component} variant="outline">
                         {component}
                       </Badge>
@@ -359,5 +416,5 @@ export default function MyComponent() {
         </Tabs>
       </div>
     </div>
-  );
+  )
 }

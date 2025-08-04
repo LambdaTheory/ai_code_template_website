@@ -86,7 +86,9 @@ export function generateSEOMetadata(config: SEOConfig = {}): Metadata {
 }
 
 // 生成博客文章的 SEO metadata
-export function generateBlogSEOMetadata(articleData: BlogArticleData): Metadata {
+export function generateBlogSEOMetadata(
+  articleData: BlogArticleData
+): Metadata {
   return generateSEOMetadata({
     title: `${articleData.title} - ${seoConfig.blog.title}`,
     description: articleData.description,
@@ -96,65 +98,78 @@ export function generateBlogSEOMetadata(articleData: BlogArticleData): Metadata 
     openGraph: {
       ...seoConfig.blog.openGraph,
       type: 'article',
-      images: articleData.image ? [
-        {
-          url: articleData.image,
-          width: 1200,
-          height: 630,
-          alt: articleData.title,
-        }
-      ] : seoConfig.blog.openGraph.images,
+      images: articleData.image
+        ? [
+            {
+              url: articleData.image,
+              width: 1200,
+              height: 630,
+              alt: articleData.title,
+            },
+          ]
+        : seoConfig.blog.openGraph.images,
     },
   })
 }
 
 // 生成结构化数据
-export function generateStructuredData(type: 'website' | 'blog' | 'article', data?: BlogArticleData): string {
+export function generateStructuredData(
+  type: 'website' | 'blog' | 'article',
+  data?: BlogArticleData
+): string {
   const structuredData = seoConfig.blog.structuredData
 
   switch (type) {
     case 'website':
       return JSON.stringify(structuredData.website, null, 2)
-    
+
     case 'blog':
-      return JSON.stringify([
-        structuredData.website,
-        structuredData.organization,
-        structuredData.blog,
-      ], null, 2)
-    
+      return JSON.stringify(
+        [
+          structuredData.website,
+          structuredData.organization,
+          structuredData.blog,
+        ],
+        null,
+        2
+      )
+
     case 'article':
       if (!data) {
         throw new Error('Article data is required for article structured data')
       }
-      
+
       const articleStructuredData = {
         ...structuredData.article,
         headline: data.title,
         description: data.description,
         image: data.image || structuredData.organization.logo.url,
         author: {
-          "@type": "Person",
+          '@type': 'Person',
           name: data.author,
         },
         datePublished: data.datePublished,
         dateModified: data.dateModified || data.datePublished,
         mainEntityOfPage: {
-          "@type": "WebPage",
-          "@id": data.url,
+          '@type': 'WebPage',
+          '@id': data.url,
         },
         keywords: data.keywords?.join(', ') || '',
         articleSection: data.category || '技术文章',
         wordCount: data.wordCount,
       }
 
-      return JSON.stringify([
-        structuredData.website,
-        structuredData.organization,
-        structuredData.blog,
-        articleStructuredData,
-      ], null, 2)
-    
+      return JSON.stringify(
+        [
+          structuredData.website,
+          structuredData.organization,
+          structuredData.blog,
+          articleStructuredData,
+        ],
+        null,
+        2
+      )
+
     default:
       return JSON.stringify(structuredData.website, null, 2)
   }
@@ -168,7 +183,7 @@ export function getSEOConfig() {
 // 博客列表页面的 SEO
 export function generateBlogListSEOMetadata(): Metadata {
   const blogConfig = seoConfig.blog
-  
+
   return generateSEOMetadata({
     title: blogConfig.title,
     description: blogConfig.description,

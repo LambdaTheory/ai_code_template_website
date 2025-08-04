@@ -25,7 +25,7 @@ export const revalidate = 60; // 每60秒重新验证一次
 export default async function ISRDemoPage() {
   // 获取数据的异步函数
   const data = await fetchData();
-  
+
   return (
     <div className="container mx-auto px-4 py-8">
       <h1 className="text-3xl font-bold mb-6">ISR 演示页面</h1>
@@ -51,24 +51,26 @@ async function fetchData() {
 ### 2. 不同的重新验证策略
 
 #### 时间基础的重新验证
+
 ```typescript
 // 每30秒重新验证
-export const revalidate = 30;
+export const revalidate = 30
 
 // 每小时重新验证
-export const revalidate = 3600;
+export const revalidate = 3600
 
 // 每天重新验证
-export const revalidate = 86400;
+export const revalidate = 86400
 ```
 
 #### 按需重新验证
+
 ```typescript
 // 禁用自动重新验证，只能手动触发
-export const revalidate = false;
+export const revalidate = false
 
 // 或者设置为0
-export const revalidate = 0;
+export const revalidate = 0
 ```
 
 ## 🔧 高级配置
@@ -78,17 +80,17 @@ export const revalidate = 0;
 ```typescript
 async function getData() {
   const res = await fetch('https://api.example.com/posts', {
-    next: { 
+    next: {
       revalidate: 60,
-      tags: ['posts'] // 用于按需重新验证
-    }
-  });
-  
+      tags: ['posts'], // 用于按需重新验证
+    },
+  })
+
   if (!res.ok) {
-    throw new Error('Failed to fetch data');
+    throw new Error('Failed to fetch data')
   }
-  
-  return res.json();
+
+  return res.json()
 }
 ```
 
@@ -97,7 +99,7 @@ async function getData() {
 ```typescript
 export default async function ConditionalISRPage() {
   const data = await fetchDataWithCondition();
-  
+
   return (
     <div>
       <h1>条件ISR页面</h1>
@@ -108,13 +110,13 @@ export default async function ConditionalISRPage() {
 
 async function fetchDataWithCondition() {
   const isDevelopment = process.env.NODE_ENV === 'development';
-  
+
   const response = await fetch('https://api.example.com/data', {
-    next: { 
+    next: {
       revalidate: isDevelopment ? 10 : 3600 // 开发环境10秒，生产环境1小时
     }
   });
-  
+
   return response.json();
 }
 ```
@@ -125,14 +127,14 @@ async function fetchDataWithCondition() {
 export default async function RobustISRPage() {
   let data;
   let error = null;
-  
+
   try {
     data = await fetchDataWithFallback();
   } catch (err) {
     error = err;
     data = getStaticFallbackData();
   }
-  
+
   return (
     <div className="container mx-auto px-4 py-8">
       {error && (
@@ -149,11 +151,11 @@ async function fetchDataWithFallback() {
   const response = await fetch('https://api.example.com/data', {
     next: { revalidate: 60 }
   });
-  
+
   if (!response.ok) {
     throw new Error(`HTTP error! status: ${response.status}`);
   }
-  
+
   return response.json();
 }
 
@@ -179,14 +181,14 @@ interface BlogPostProps {
 
 export default async function BlogPost({ params }: BlogPostProps) {
   const post = await getPost(params.slug);
-  
+
   return (
     <article className="max-w-4xl mx-auto px-4 py-8">
       <h1 className="text-4xl font-bold mb-4">{post.title}</h1>
       <p className="text-gray-600 mb-8">
         发布时间: {new Date(post.publishedAt).toLocaleDateString('zh-CN')}
       </p>
-      <div 
+      <div
         className="prose prose-lg max-w-none"
         dangerouslySetInnerHTML={{ __html: post.content }}
       />
@@ -210,7 +212,7 @@ export const revalidate = 300; // 每5分钟更新
 
 export default async function ProductsPage() {
   const products = await getProducts();
-  
+
   return (
     <div className="container mx-auto px-4 py-8">
       <h1 className="text-3xl font-bold mb-8">产品列表</h1>
@@ -229,7 +231,7 @@ export default async function ProductsPage() {
 
 async function getProducts() {
   const response = await fetch('https://api.example.com/products', {
-    next: { 
+    next: {
       revalidate: 300,
       tags: ['products']
     }
@@ -244,27 +246,27 @@ async function getProducts() {
 
 ```typescript
 // src/app/api/revalidate/route.ts
-import { revalidateTag } from 'next/cache';
-import { NextRequest } from 'next/server';
+import { revalidateTag } from 'next/cache'
+import { NextRequest } from 'next/server'
 
 export async function POST(request: NextRequest) {
-  const secret = request.nextUrl.searchParams.get('secret');
-  const tag = request.nextUrl.searchParams.get('tag');
-  
+  const secret = request.nextUrl.searchParams.get('secret')
+  const tag = request.nextUrl.searchParams.get('tag')
+
   // 验证密钥
   if (secret !== process.env.REVALIDATE_SECRET) {
-    return Response.json({ message: 'Invalid secret' }, { status: 401 });
+    return Response.json({ message: 'Invalid secret' }, { status: 401 })
   }
-  
+
   if (!tag) {
-    return Response.json({ message: 'Missing tag' }, { status: 400 });
+    return Response.json({ message: 'Missing tag' }, { status: 400 })
   }
-  
+
   try {
-    revalidateTag(tag);
-    return Response.json({ revalidated: true, now: Date.now() });
+    revalidateTag(tag)
+    return Response.json({ revalidated: true, now: Date.now() })
   } catch (err) {
-    return Response.json({ message: 'Error revalidating' }, { status: 500 });
+    return Response.json({ message: 'Error revalidating' }, { status: 500 })
   }
 }
 ```
@@ -273,21 +275,21 @@ export async function POST(request: NextRequest) {
 
 ```typescript
 // src/app/api/revalidate-path/route.ts
-import { revalidatePath } from 'next/cache';
-import { NextRequest } from 'next/server';
+import { revalidatePath } from 'next/cache'
+import { NextRequest } from 'next/server'
 
 export async function POST(request: NextRequest) {
-  const path = request.nextUrl.searchParams.get('path');
-  
+  const path = request.nextUrl.searchParams.get('path')
+
   if (!path) {
-    return Response.json({ message: 'Missing path' }, { status: 400 });
+    return Response.json({ message: 'Missing path' }, { status: 400 })
   }
-  
+
   try {
-    revalidatePath(path);
-    return Response.json({ revalidated: true, now: Date.now() });
+    revalidatePath(path)
+    return Response.json({ revalidated: true, now: Date.now() })
   } catch (err) {
-    return Response.json({ message: 'Error revalidating' }, { status: 500 });
+    return Response.json({ message: 'Error revalidating' }, { status: 500 })
   }
 }
 ```
@@ -300,7 +302,7 @@ export async function POST(request: NextRequest) {
 export default async function DebugISRPage() {
   const buildTime = new Date().toISOString();
   const data = await fetchDataWithDebug();
-  
+
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="bg-gray-100 p-4 rounded-lg mb-6">
@@ -319,7 +321,7 @@ async function fetchDataWithDebug() {
   const response = await fetch('https://api.example.com/data', {
     next: { revalidate: 60 }
   });
-  
+
   const data = await response.json();
   return { ...data, fetchTime };
 }
@@ -333,7 +335,7 @@ export default async function PerformanceISRPage() {
   const data = await fetchData();
   const endTime = Date.now();
   const fetchDuration = endTime - startTime;
-  
+
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="bg-blue-50 p-4 rounded-lg mb-6">
@@ -351,16 +353,18 @@ export default async function PerformanceISRPage() {
 ## ⚠️ 注意事项和最佳实践
 
 ### 1. 选择合适的重新验证时间
+
 - **高频更新内容**：30秒 - 5分钟
-- **中频更新内容**：1小时 - 6小时  
+- **中频更新内容**：1小时 - 6小时
 - **低频更新内容**：1天 - 1周
 
 ### 2. 错误处理
+
 ```typescript
 export default async function SafeISRPage() {
   let data = null;
   let error = null;
-  
+
   try {
     data = await fetchDataSafely();
   } catch (err) {
@@ -368,7 +372,7 @@ export default async function SafeISRPage() {
     // 使用静态回退数据
     data = await getStaticData();
   }
-  
+
   return (
     <div>
       {error && <ErrorBanner error={error} />}
@@ -379,24 +383,26 @@ export default async function SafeISRPage() {
 ```
 
 ### 3. 缓存策略
+
 ```typescript
 // 组合使用不同的缓存策略
 async function fetchWithStrategy() {
   // 短期缓存用于频繁访问的数据
   const hotData = await fetch('/api/hot-data', {
-    next: { revalidate: 60 }
-  });
-  
+    next: { revalidate: 60 },
+  })
+
   // 长期缓存用于稳定的数据
   const staticData = await fetch('/api/static-data', {
-    next: { revalidate: 86400 }
-  });
-  
-  return { hotData, staticData };
+    next: { revalidate: 86400 },
+  })
+
+  return { hotData, staticData }
 }
 ```
 
 ### 4. 环境配置
+
 ```typescript
 // next.config.ts
 const nextConfig = {
@@ -404,19 +410,21 @@ const nextConfig = {
     // 启用ISR相关的实验性功能
     isrMemoryCacheSize: 0, // 禁用内存缓存（适用于无服务器环境）
   },
-};
+}
 
-export default nextConfig;
+export default nextConfig
 ```
 
 ## 🚀 部署注意事项
 
 ### Vercel部署
+
 - ISR在Vercel上开箱即用
 - 支持边缘缓存和全球分发
 - 自动处理缓存失效
 
 ### 自托管部署
+
 ```dockerfile
 # Dockerfile示例
 FROM node:18-alpine
@@ -445,4 +453,4 @@ ISR是Next.js中一个强大的功能，它让你能够：
 
 ---
 
-*本文档基于Next.js 15+版本编写，适用于使用App Router的项目。*
+_本文档基于Next.js 15+版本编写，适用于使用App Router的项目。_

@@ -1,8 +1,5 @@
 {
-  "ignore": [
-    ".claude/voice/girl",
-    ".claude/voice/man"
-  ],
+  "ignore": [".claude/voice/girl", ".claude/voice/man"],
   "descriptions": {
     "src/app/page.tsx": "应用首页组件，展示项目功能特性和导航链接的主页面",
     "src/app/layout.tsx": "根布局组件，定义了应用的全局布局、字体和元数据配置",

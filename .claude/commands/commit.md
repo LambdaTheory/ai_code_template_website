@@ -11,14 +11,14 @@ allowed-tools: Read,Write,Edit,Bash
 
 3. 根据修改内容生成语义化 commit 信息：
    - 分析代码变更的性质，选择合适的类型前缀：
-     * feat: 新功能
-     * fix: 修复问题
-     * refactor: 重构代码
-     * perf: 性能优化
-     * style: 代码格式调整
-     * docs: 文档更新
-     * test: 测试相关
-     * chore: 构建/工具/依赖更新
+     - feat: 新功能
+     - fix: 修复问题
+     - refactor: 重构代码
+     - perf: 性能优化
+     - style: 代码格式调整
+     - docs: 文档更新
+     - test: 测试相关
+     - chore: 构建/工具/依赖更新
    - 使用格式：`类型(作用域): 简洁的中文描述`
    - 如果有重大变更，添加 `!` 标记：`feat!: 描述`
 

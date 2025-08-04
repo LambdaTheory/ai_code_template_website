@@ -2,7 +2,15 @@
   "blog": {
     "title": "AI代码模板博客 - 前端开发技术分享",
     "description": "基于 Next.js 15+ 的现代 Web 应用模板",
-    "keywords": ["前端开发", "AI工具", "代码模板", "React", "Next.js", "TypeScript", "技术分享"],
+    "keywords": [
+      "前端开发",
+      "AI工具",
+      "代码模板",
+      "React",
+      "Next.js",
+      "TypeScript",
+      "技术分享"
+    ],
     "author": "Your Name",
     "siteUrl": "https://example.com",
     "openGraph": {

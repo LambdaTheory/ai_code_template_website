@@ -29,7 +29,7 @@ const staticPages = [
 
 // 生成静态页面的sitemap条目
 export function generateSitemapPages(): MetadataRoute.Sitemap {
-  return staticPages.map((page) => ({
+  return staticPages.map(page => ({
     url: `${baseUrl}${page.path}`,
     lastModified: new Date(),
     changeFrequency: page.changeFrequency,
@@ -41,20 +41,27 @@ export function generateSitemapPages(): MetadataRoute.Sitemap {
 export async function generateBlogSitemapEntries(): Promise<MetadataRoute.Sitemap> {
   // 这里可以从CMS、数据库或文件系统获取博客文章
   // 目前返回示例数据，你可以根据实际需求修改
-  
+
   try {
     // 示例：如果你有博客文章数据，可以在这里获取
     // const posts = await getBlogPosts()
-    
+
     // 目前返回空数组，因为模板中没有博客功能
     const blogPosts: Array<{
       slug: string
       lastModified: Date
       priority?: number
-      changeFrequency?: 'always' | 'hourly' | 'daily' | 'weekly' | 'monthly' | 'yearly' | 'never'
+      changeFrequency?:
+        | 'always'
+        | 'hourly'
+        | 'daily'
+        | 'weekly'
+        | 'monthly'
+        | 'yearly'
+        | 'never'
     }> = []
-    
-    return blogPosts.map((post) => ({
+
+    return blogPosts.map(post => ({
       url: `${baseUrl}/blog/${post.slug}`,
       lastModified: post.lastModified,
       changeFrequency: post.changeFrequency || 'weekly',
@@ -70,6 +77,6 @@ export async function generateBlogSitemapEntries(): Promise<MetadataRoute.Sitema
 export async function getAllSitemapEntries(): Promise<MetadataRoute.Sitemap> {
   const staticPages = generateSitemapPages()
   const blogPages = await generateBlogSitemapEntries()
-  
+
   return [...staticPages, ...blogPages]
 }

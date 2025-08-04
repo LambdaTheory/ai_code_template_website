@@ -34,26 +34,30 @@
 ## 🛠️ Getting Started
 
 1. **Clone the repository**
+
    ```bash
    git clone https://github.com/LambdaTheory/ai-code-template-website
    cd ai-code-template-website
    ```
 
 2. **Install dependencies**
+
    ```bash
    pnpm install
    ```
 
 3. **Start the development server**
+
    ```bash
    pnpm dev
    ```
 
 4. **Open your browser**
-   
+
    Visit [http://localhost:3000](http://localhost:3000) to see the application.
 
 ## 📁 Project Structure
+
 [参考](docs/目录结构.md)
 
 ## 🎨 ShadCN UI Components
@@ -77,6 +81,7 @@ The template includes ISR configuration:
 ### Vercel (Recommended)
 
 1. **Push to GitHub**
+
    ```bash
    git add .
    git commit -m "Initial commit"
@@ -97,6 +102,7 @@ The template includes ISR configuration:
 ### Other Platforms
 
 The application can be deployed to any platform supporting Next.js:
+
 - Netlify
 - AWS
 - Google Cloud
@@ -113,15 +119,19 @@ The application can be deployed to any platform supporting Next.js:
 ## 🔧 Configuration
 
 ### Tailwind CSS
+
 Configuration in `tailwind.config.js` and `src/app/globals.css`
 
 ### ShadCN UI
+
 Configuration in `components.json`
 
 ### Next.js
+
 Configuration in `next.config.ts` with ISR and caching optimizations
 
 ### Vercel
+
 Configuration in `vercel.json` for deployment settings
 
 ## 🎯 Usage Examples
@@ -130,7 +140,7 @@ Configuration in `vercel.json` for deployment settings
 
 ```typescript
 // Set revalidation time (in seconds)
-export const revalidate = 60;
+export const revalidate = 60
 
 export default async function MyPage() {
   // Your page content
