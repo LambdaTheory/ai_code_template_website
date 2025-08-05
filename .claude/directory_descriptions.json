@@ -1,5 +1,8 @@
 {
-  "ignore": [".claude/voice/girl", ".claude/voice/man"],
+  "ignore": [
+    ".claude/voice/girl",
+    ".claude/voice/man"
+  ],
   "descriptions": {
     "src/app/page.tsx": "应用首页组件，展示项目功能特性和导航链接的主页面",
     "src/app/layout.tsx": "根布局组件，定义了应用的全局布局、字体和元数据配置",
@@ -105,6 +108,7 @@
     ".claude/commands/code-review.md": "代码审查命令文档，定义了使用AI进行代码审查的命令配置和流程",
     "scripts": "脚本工具目录，包含项目自动化脚本和配置文件",
     "scripts/.code-review-config.example": "代码审查配置示例文件，提供代码审查脚本的配置模板",
-    "scripts/code-review.sh": "代码审查自动化脚本，提供命令行工具执行代码审查任务"
+    "scripts/code-review.sh": "代码审查自动化脚本，提供命令行工具执行代码审查任务",
+    ".claude/tools/format-project.sh": "跨平台项目格式化脚本，自动检测Node.js、Rust、Python、Go等项目类型并执行相应的代码格式化工具"
   }
 }

@@ -1,6 +1,7 @@
 ---
+name: describe-files
 description: 维护和补全目录结构中缺少描述的文件
-allowed-tools: Read,Write,Edit,Bash
+tools: Read,Write,Edit,Bash
 model: sonnet
 color: orange
 ---
