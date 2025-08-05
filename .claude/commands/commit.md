@@ -10,7 +10,7 @@ allowed-tools: Read,Write,Edit,Bash,Task
 ## 执行步骤
 
 1. **预处理**：
-   - 执行 `npm run format` 修复格式问题
+   - 执行 `./.claude/tools/format-project.sh` 自动检测项目类型并格式化
    - 使用 Task 工具调用 describe-files subagent 更新文件结构表：
      ```
      Task(subagent_type="general-purpose", description="更新文件结构表", prompt="请调用 describe-files subagent 来更新项目的文件结构表...")
